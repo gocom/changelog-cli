@@ -36,14 +36,14 @@ import type {ChangelogDocument, Changelog} from '@gocom/changelog';
  * @group Library
  * @category API
  */
-export const parseFile = async (path: string) => {
+export const parseFile = async (path: string): Promise<Changelog[]|undefined> => {
   try {
     const contents: ChangelogDocument = await readFile(path, {
       encoding: 'utf-8'
     });
 
     return parse(contents);
-  } catch (e) {
+  } catch {
     return undefined;
   }
 };

@@ -23,12 +23,12 @@
  * SOFTWARE.
  */
 
+import path from 'node:path';
 import type {ReleaseNotesOptions, Template} from '@gocom/changelog';
 import {asReleaseNotes} from '@gocom/changelog';
-import {GetReleaseNotesOptions} from '../types/ReleaseNotes';
+import type {GetReleaseNotesOptions} from '../types/ReleaseNotes';
 import {readJsonFile} from './Helpers';
 import {parseFile} from './Parser';
-import path from 'node:path';
 
 /**
  * Default release notes template.

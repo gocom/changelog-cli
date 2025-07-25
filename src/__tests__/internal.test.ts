@@ -23,23 +23,8 @@
  * SOFTWARE.
  */
 
-import {readFile} from 'node:fs/promises';
+import {releaseNotesTemplate} from '../internal';
 
-/**
- * Read JSON file.
- */
-export const readJsonFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
-
-      return JSON.parse(content);
-    } catch {
-      return undefined;
-    }
-  }
-
-  return undefined;
-};
+test('Exports', () => {
+  expect(releaseNotesTemplate).toBeDefined();
+});
