@@ -1,0 +1,8 @@
+.*
+/*
+__tests__
+*.test.js
+!/dist/
+!/CHANGELOG.md
+!/LICENSE
+!/README.md

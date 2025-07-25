@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+set -eu
+
+app_name="${0##*/}"
+app_version="0.0.0"
+
+usage () {
+  cat <<EOF
+Print release README.md for the given version.
+
+Usage:
+  $ $app_name [options] <version>
+
+Options:
+  -h, --help     Print this message
+  -v, --version  Print version number
+
+Example:
+  $ $app_name 0.1.0
+EOF
+}
+
+main () {
+  local version notes number minor prerelease
+
+  version="${1:-}"
+
+  if ! [ "$version" ]; then
+    echo "Version is required." >&2
+    exit 1
+  fi
+
+  # Header.
+  cat <<EOF
+Changelog
+-----
+EOF
+
+  # Remove badges, replace branch URL references with the version tag.
+  sed -e "1,/\[/d" -e '/🛠️ Development/,$d' README.md \
+    | sed "s/\/main\//\/$version\//"
+
+  # Add changes section.
+  notes="$(sed -e "1,/## $version/d" -e '/##/,$d' CHANGELOG.md)"
+
+  if [ "$notes" ]; then
+    cat <<EOF
+
+🚀 Changes in $version
+-----
+$notes
+
+For changes in previous versions, see [CHANGELOG.md](https://github.com/gocom/changelog-cli/blob/$version/CHANGELOG.md).
+
+EOF
+  fi
+}
+
+case "${1:-}" in
+  -h|--help) usage ;;
+  -v|--version) echo "$app_version" ;;
+  *) main "$@" ;;
+esac
