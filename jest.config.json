@@ -1,0 +1,14 @@
+{
+  "bail": true,
+  "collectCoverage": true,
+  "coverageDirectory": "../test-reports/coverage",
+  "rootDir": "./src",
+  "verbose": true,
+  "testEnvironment": "node",
+  "transform": {
+    "^.+.tsx?$": ["ts-jest",{}]
+  },
+  "collectCoverageFrom": [
+    "**/*.ts"
+  ]
+}

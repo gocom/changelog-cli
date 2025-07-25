@@ -1,0 +1,14 @@
+.*
+!.gitattributes
+!.github
+!.gitignore
+!.editorconfig
+!.npmignore
+!.nvmrc
+/*.tgz
+/dist/
+/docs/
+/node_modules/
+/test-reports/
+/RELEASE-NOTES.md
+package-lock.json

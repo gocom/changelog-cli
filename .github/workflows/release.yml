@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release:
+    name: Create release
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: |
+          echo "contents<<VERSIONEOF" >> $GITHUB_OUTPUT
+          echo "$GITHUB_REF" | cut -d / -f 3 >> $GITHUB_OUTPUT
+          echo "VERSIONEOF" >> $GITHUB_OUTPUT
+
+      - name: Generate release notes
+        id: changelog
+        run: make generate-release-notes VERSION=${{ steps.version.outputs.contents }}
+
+      - name: Create release
+        id: create_release
+        uses: shogo82148/actions-create-release@v1
+        with:
+          body_path: ${{ github.workspace }}/RELEASE-NOTES.md
+          prerelease: ${{ contains(steps.version.outputs.contents, '-') }}
