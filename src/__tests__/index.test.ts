@@ -23,9 +23,16 @@
  * SOFTWARE.
  */
 
-import {getReleaseNotes, parseFile} from '../index';
+import {
+  extractFromFile,
+  getReleaseNotes,
+  latestFromFile,
+  parseFile
+} from '../index';
 
 test('Exports', () => {
+  expect(extractFromFile).toBeDefined();
   expect(getReleaseNotes).toBeDefined();
+  expect(latestFromFile).toBeDefined();
   expect(parseFile).toBeDefined();
 });

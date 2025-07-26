@@ -23,36 +23,28 @@
  * SOFTWARE.
  */
 
+import type {Version} from '@gocom/changelog';
+
 /**
- * Extract release notes from Markdown formatted changelog document.
+ * Extract options.
  *
- * Allows parsing CHANGELOG.md file contents, and extracting release notes from it.
+ * Available options for {@link extractFromFile}.
  *
- * @module API
  * @group Library
- * @category Public
- * @see [GitHub](https://github.com/gocom/changelog-cli)
- * @see [Package in npm registry](https://www.npmjs.com/package/@gocom/changelog-cli)
- * @see [Releases](https://github.com/gocom/changelog-cli/releases)
+ * @category Options
  */
+export interface ExtractOptions {
+  /**
+   * Path to the source changelog document to parse.
+   */
+  path: string
 
-export {
-  extractFromFile,
-  latestFromFile,
-} from './library/Extract';
-
-export {
-  parseFile,
-} from './library/Parser';
-
-export {
-  getReleaseNotes,
-} from './library/ReleaseNotes';
-
-export type {
-  ExtractOptions,
-} from './types/Extract';
-
-export type {
-  GetReleaseNotesOptions,
-} from './types/ReleaseNotes';
+  /**
+   * Version to extract.
+   *
+   * The specified version number should follow semantic versioning rules.
+   *
+   * @see [Semantic Versioning](https://semver.org/)
+   */
+  version: Version
+}
