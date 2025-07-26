@@ -20,9 +20,12 @@ Allows parsing CHANGELOG.md file contents, and extracting release notes from it.
 
 ### API
 
+- [extractFromFile](../API/API.extractFromFile.md)
 - [getReleaseNotes](../API/API.getReleaseNotes.md)
+- [latestFromFile](../API/API.latestFromFile.md)
 - [parseFile](../API/API.parseFile.md)
 
 ### Options
 
+- [ExtractOptions](../Options/API.ExtractOptions.md)
 - [GetReleaseNotesOptions](../Options/API.GetReleaseNotesOptions.md)

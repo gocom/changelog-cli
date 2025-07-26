@@ -6,7 +6,7 @@
 
 # Interface: GetReleaseNotesOptions
 
-Defined in: [types/ReleaseNotes.ts:36](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L36)
+Defined in: [types/ReleaseNotes.ts:36](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L36)
 
 Get release notes options.
 
@@ -18,7 +18,7 @@ Options for [getReleaseNotes](../API/API.getReleaseNotes.md).
 
 > **directory**: `string`
 
-Defined in: [types/ReleaseNotes.ts:42](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L42)
+Defined in: [types/ReleaseNotes.ts:42](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L42)
 
 Project directory to process.
 
@@ -30,7 +30,7 @@ File such as CHANGELOG.md and package manager manifest files are looked up from 
 
 > `optional` **docsUrl**: `string`
 
-Defined in: [types/ReleaseNotes.ts:102](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L102)
+Defined in: [types/ReleaseNotes.ts:102](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L102)
 
 URL to the documentation.
 
@@ -50,7 +50,7 @@ The URL can contain Handlebar's template string.
 
 > `optional` **downloadUrl**: `string`
 
-Defined in: [types/ReleaseNotes.ts:116](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L116)
+Defined in: [types/ReleaseNotes.ts:116](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L116)
 
 Download URL.
 
@@ -70,7 +70,7 @@ The URL can contain Handlebar's template string.
 
 > `optional` **isComposer**: `boolean`
 
-Defined in: [types/ReleaseNotes.ts:88](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L88)
+Defined in: [types/ReleaseNotes.ts:88](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L88)
 
 Enables Composer package processing.
 
@@ -92,7 +92,7 @@ command in the generated release notes, if the file is found.
 
 > `optional` **isNpm**: `boolean`
 
-Defined in: [types/ReleaseNotes.ts:72](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L72)
+Defined in: [types/ReleaseNotes.ts:72](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L72)
 
 Enables npm package processing.
 
@@ -114,7 +114,7 @@ command in the generated release notes, if the file is found.
 
 > `optional` **version**: `string`
 
-Defined in: [types/ReleaseNotes.ts:56](https://github.com/gocom/changelog-cli/blob/b6cbd6e9edc6103a265b1aa93689e040b73b367f/src/types/ReleaseNotes.ts#L56)
+Defined in: [types/ReleaseNotes.ts:56](https://github.com/gocom/changelog-cli/blob/c5eb9a650dc7e70b281f2a2b55174b861d635527/src/types/ReleaseNotes.ts#L56)
 
 Version number the release notes are created for.
 
