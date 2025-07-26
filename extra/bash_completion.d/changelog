@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+# Changelog CLI
+# https://github.com/gocom/changelog-cli
+#
+# Copyright (C) 2025 Jukka Svahn
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+_changelog () {
+  local cur prev words cword options
+
+  _init_completion || return
+
+  if [ "$cword" -eq 1 ]; then
+    COMPREPLY=($(compgen -W 'extract help latest parse release-notes versions -V --version -h --help' -- "$cur"))
+    return
+  fi
+
+  case "${words[1]}" in
+    extract)
+      case "$prev" in
+        -o|--output-file)
+            _filedir
+            return
+            ;;
+      esac
+
+      case "$cur" in
+        -*)
+          COMPREPLY=($(compgen -W '-o --output-file -h --help' -- "$cur"))
+          return
+          ;;
+        *)
+          if [ "$cword" -eq 2 ]; then
+            COMPREPLY=($(compgen -W '0.1.0' -- "$cur"))
+            return
+          fi
+
+          if [ "$cword" -eq 3 ]; then
+            _filedir
+            return
+          fi
+          ;;
+      esac
+
+      return
+      ;;
+
+    help)
+      COMPREPLY=($(compgen -W 'extract latest parse release-notes versions' -- "$cur"))
+      return
+      ;;
+
+    latest)
+      case "$prev" in
+        -o|--output-file)
+          _filedir
+          return
+          ;;
+      esac
+
+      case "$cur" in
+        -*)
+          COMPREPLY=($(compgen -W '-o --output-file -h --help' -- "$cur"))
+          return
+          ;;
+        *)
+          if [ "$cword" -eq 2 ]; then
+            _filedir
+            return
+          fi
+          ;;
+      esac
+
+      return
+      ;;
+
+    release-notes)
+      case "$prev" in
+        -o|--output-file)
+            _filedir
+            return
+            ;;
+      esac
+
+      case "$cur" in
+        -*)
+          COMPREPLY=($(compgen -W '-o --output-file -h --help' -- "$cur"))
+          return
+          ;;
+        *)
+          if [ "$cword" -eq 2 ]; then
+            COMPREPLY=($(compgen -W '0.1.0' -- "$cur"))
+            return
+          fi
+
+          if [ "$cword" -eq 3 ]; then
+            _filedir -d
+            return
+          fi
+          ;;
+      esac
+
+      return
+  esac
+} && complete -F _changelog changelog

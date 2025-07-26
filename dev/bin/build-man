@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -eu
+
+app_name="${0##*/}"
+app_version="0.0.0"
+
+usage () {
+  cat <<EOF
+Build man pages.
+
+Usage:
+  $ $app_name [options] <version>
+
+Options:
+  -h, --help     Print this message
+  -v, --version  Print version number
+
+Example:
+  $ $app_name
+EOF
+}
+
+main () {
+  local file directory basename name
+
+  mkdir -p dist/man/man1/
+
+  for file in man/man1/*.md; do
+    directory="$(basename "$(dirname "$file")")"
+    basename="$(basename "$file")"
+    name="${basename%.*}"
+
+    pandoc -s -f markdown -t man -o "dist/man/$directory/$name" "$file"
+  done
+}
+
+case "${1:-}" in
+  -h|--help) usage ;;
+  -v|--version) echo "$app_version" ;;
+  *) main "$@" ;;
+esac

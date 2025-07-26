@@ -28,7 +28,7 @@ import {createCommand} from 'commander';
 import pc from 'picocolors';
 import type {PathLike} from 'node:fs';
 import {fatal, ok} from '../library/Command';
-import {latestFromFile} from '../library/Extract';
+import {parseFile} from '../library/Parser';
 
 /**
  * Options.
@@ -40,41 +40,51 @@ interface Options {
 const command = createCommand();
 
 command
-  .name('latest')
+  .name('parse')
   .argument('[filename]', 'CHANGELOG.md to process', './CHANGELOG.md')
-  .option('-o --output-file <filename>', 'File to write results to')
-  .summary('extract latest version from CHANGELOG.md as JSON')
-  .description(`Extracts the latest version from a Markdown formatted changelog file.
-Returns results as a JSON object, containing detailed details extracted from
-the specified changelog file. The results object will look similar to the
+  .option('-o --output-file <filename>', 'File to write release notes to')
+  .summary('parse CHANGELOG.md into JSON')
+  .description(`Parses markdown formatted changelog file into JSON presentation.
+Returns results as an array of JSON object, containing detailed details extracted
+from the specified changelog file. The results object will look similar to the
 following:
 
-  {
-    "version": "0.1.0",
-    "isPrerelease": false,
-    "titleStart": "",
-    "titleEnd": "",
-    "notes": "* Initial release."
-  }
+  [
+    {
+      "version": "0.2.0",
+      "isPrerelease": false,
+      "titleStart": "",
+      "titleEnd": "",
+      "notes": "* Change 1."
+    },
+    {
+      "version": "0.1.0",
+      "isPrerelease": false,
+      "titleStart": "",
+      "titleEnd": "",
+      "notes": "* Initial release."
+    }
+  ]
 
 If no ${pc.yellow('filename')} argument is specified, looks for file named ${pc.cyan('CHANGELOG.md')} from
 the current working directory. If ${pc.yellow('--output-file')} option is specified, the
 results are written to the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
-  .addHelpText('before', `Extract latest version from CHANGELOG.md as JSON.
+  .addHelpText('before', `Parse CHANGELOG.md into JSON.
 `)
   .addHelpText('after', `
 ${pc.magenta('Examples:')}
-  $ changelog latest
+  $ changelog parse
 `)
   .action(async (
     filename: string|undefined,
     options?: Options
   ) => {
     const outputFile = options?.outputFile;
-    const changelog = await latestFromFile(filename ?? './CHANGELOG.md');
+
+    const changelog = await parseFile(filename ?? './CHANGELOG.md');
 
     if (changelog === undefined) {
-      fatal('Unable to extract requested changelog.');
+      fatal('Unable to parse file.');
       return;
     }
 
@@ -82,7 +92,7 @@ ${pc.magenta('Examples:')}
 
     if (outputFile) {
       await writeFile(outputFile, result);
-      ok(`Done. Changelog written.
+      ok(`Done. Results written.
 ${pc.blue('→')} ${outputFile}`);
       return;
     }

@@ -17,11 +17,13 @@ Development environment
 -----
 
 The local development environment uses nvm through Makefile wrapper to manage Node and npm version.
+Docker image is used for build man pages.
 
 ### Requirements
 
 * GNU make
 * [nvm](https://github.com/nvm-sh/nvm)
+* Docker and Docker Compose
 
 If nvm is not installed, the Makefile defaults to any node and npm binaries found from PATH.
 

@@ -91,7 +91,6 @@ ${pc.blue('→')} ${outputFile}`);
     }
 
     console.log(notes);
-    ok('Done.');
   });
 
 export default command;

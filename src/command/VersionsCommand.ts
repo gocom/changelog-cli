@@ -28,7 +28,7 @@ import {createCommand} from 'commander';
 import pc from 'picocolors';
 import type {PathLike} from 'node:fs';
 import {fatal, ok} from '../library/Command';
-import {latestFromFile} from '../library/Extract';
+import {parseFile} from '../library/Parser';
 
 /**
  * Options.
@@ -40,54 +40,54 @@ interface Options {
 const command = createCommand();
 
 command
-  .name('latest')
+  .name('versions')
   .argument('[filename]', 'CHANGELOG.md to process', './CHANGELOG.md')
-  .option('-o --output-file <filename>', 'File to write results to')
-  .summary('extract latest version from CHANGELOG.md as JSON')
-  .description(`Extracts the latest version from a Markdown formatted changelog file.
-Returns results as a JSON object, containing detailed details extracted from
-the specified changelog file. The results object will look similar to the
-following:
-
-  {
-    "version": "0.1.0",
-    "isPrerelease": false,
-    "titleStart": "",
-    "titleEnd": "",
-    "notes": "* Initial release."
-  }
+  .option('-o --output-file <filename>', 'File to write release notes to')
+  .summary('extract available versions from CHANGELOG.md')
+  .description(`Lists versions mentioned in Markdown formatted changelog file.
+Goes through version heading in the file, and lists all of them, one version
+number per line.
 
 If no ${pc.yellow('filename')} argument is specified, looks for file named ${pc.cyan('CHANGELOG.md')} from
-the current working directory. If ${pc.yellow('--output-file')} option is specified, the
-results are written to the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
-  .addHelpText('before', `Extract latest version from CHANGELOG.md as JSON.
+the current working directory.
+
+If ${pc.yellow('directory')} argument is specified, looks source files, such as CHANGELOG.md,
+from the specified directory. If not specified, looks for files from
+the current working directory.
+
+If ${pc.yellow('--output-file')} option is specified, the results are written to
+the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
+  .addHelpText('before', `Extract available versions from CHANGELOG.md.
 `)
   .addHelpText('after', `
 ${pc.magenta('Examples:')}
-  $ changelog latest
+  $ changelog versions
 `)
   .action(async (
     filename: string|undefined,
     options?: Options
   ) => {
     const outputFile = options?.outputFile;
-    const changelog = await latestFromFile(filename ?? './CHANGELOG.md');
+
+    const changelog = await parseFile(filename ?? './CHANGELOG.md');
 
     if (changelog === undefined) {
-      fatal('Unable to extract requested changelog.');
+      fatal('Unable to extract versions.');
       return;
     }
 
-    const result = JSON.stringify(changelog, null, 2);
+    const versions = changelog
+      .map((item) => item.version)
+      .join('\n');
 
     if (outputFile) {
-      await writeFile(outputFile, result);
-      ok(`Done. Changelog written.
+      await writeFile(outputFile, versions);
+      ok(`Done. Versions written.
 ${pc.blue('→')} ${outputFile}`);
       return;
     }
 
-    console.log(result);
+    console.log(versions);
   });
 
 export default command;

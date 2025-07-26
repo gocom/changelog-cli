@@ -1,15 +1,22 @@
-.PHONY: all build build-destroy clean generate-docs generate-release-notes help install lint lint-fix nvm pack pre-publish rebuild test watch
+.PHONY: all build build-man build-destroy clean generate-docs generate-release-notes help install lint lint-fix nvm pack pre-publish rebuild shell test watch
 .ONESHELL:
 
+HOST_UID ?= `id -u`
+HOST_GID ?= `id -g`
 NVM_DIR ?= ${HOME}/.nvm
 NVM = ${NVM_DIR}/nvm.sh
 NPM = npm
+RUN = docker compose run --rm -u $(HOST_UID):$(HOST_GID) build
 
 all: build
 install: node_modules dist
 
 build: nvm node_modules
 	$(NPM) run build
+	@$(MAKE) build-man
+
+build-man:
+	$(RUN) dev/bin/build-man
 
 build-destroy:
 	@echo "Removing existing build"
@@ -17,6 +24,9 @@ build-destroy:
 
 dist:
 	$(NPM) run build
+
+docker-build:
+	docker-compose build build
 
 clean:
 	rm -rf dist docs node_modules package-lock.json test-reports
@@ -45,6 +55,9 @@ else
 endif
 
 rebuild: build-destroy build
+
+shell:
+	$(RUN) bash
 
 pack: install
 	$(NPM) pack
@@ -83,6 +96,9 @@ help:
 	@echo ""
 	@echo "  $$ make clean"
 	@echo "  Clean installed dependencies and artifacts"
+	@echo ""
+	@echo "  $$ make docker-build"
+	@echo "  Re-builds Docker image"
 	@echo ""
 	@echo "  $$ make generate-docs"
 	@echo "  Build API docs"

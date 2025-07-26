@@ -100,7 +100,6 @@ ${pc.blue('→')} ${outputFile}`);
     }
 
     console.log(result);
-    ok('Done.');
   });
 
 export default command;
