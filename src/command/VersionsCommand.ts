@@ -51,10 +51,6 @@ number per line.
 If no ${pc.yellow('filename')} argument is specified, looks for file named ${pc.cyan('CHANGELOG.md')} from
 the current working directory.
 
-If ${pc.yellow('directory')} argument is specified, looks source files, such as CHANGELOG.md,
-from the specified directory. If not specified, looks for files from
-the current working directory.
-
 If ${pc.yellow('--output-file')} option is specified, the results are written to
 the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
   .addHelpText('before', `Extract available versions from CHANGELOG.md.

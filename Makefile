@@ -1,4 +1,4 @@
-.PHONY: all build build-man build-destroy clean generate-docs generate-release-notes help install lint lint-fix nvm pack pre-publish rebuild shell test watch
+.PHONY: all build build-man build-destroy clean docker-build generate-docs generate-release-notes help install lint lint-fix nvm pack pre-publish rebuild shell test watch
 .ONESHELL:
 
 HOST_UID ?= `id -u`
