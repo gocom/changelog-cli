@@ -60,3 +60,37 @@ export const addCommands = (app: Command, commands: Command[]) => {
     app.addCommand(configureCommand(command));
   }
 };
+
+/**
+ * Prints an ok message.
+ *
+ * @param {string} message Message.
+ * @group Library
+ * @category API
+ */
+export const ok = (message: string) => {
+  console.error(`${pc.green('✓')} ${message}`);
+};
+
+/**
+ * Prints an error code and exists with an error.
+ *
+ * @param {string} message Error message.
+ * @group Library
+ * @category API
+ */
+export const error = (message: string) => {
+  console.error(`${pc.red('×')} ${message}`);
+};
+
+/**
+ * Prints an error and exists with an error code.
+ *
+ * @param {string} message Error message.
+ * @group Library
+ * @category API
+ */
+export const fatal = (message: string) => {
+  error(message);
+  process.exit(1);
+};

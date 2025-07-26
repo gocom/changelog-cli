@@ -27,55 +27,53 @@ import {writeFile} from 'node:fs/promises';
 import {createCommand} from 'commander';
 import pc from 'picocolors';
 import type {PathLike} from 'node:fs';
-import {getReleaseNotes} from '../library/ReleaseNotes';
-import type {Version} from '@gocom/changelog';
+import {fatal, ok} from '../library/Command';
+import {latestFromFile} from '../library/Extract';
 
 /**
  * Options.
  */
 interface Options {
-  selectVersion?: Version
   outputFile?: PathLike
 }
 
 const command = createCommand();
 
 command
-  .name('release-notes:create')
-  .option('-s --select-version <filename>', 'Selected version')
+  .name('latest')
+  .argument('[filename]', 'CHANGELOG.md to process', './CHANGELOG.md')
   .option('-o --output-file <filename>', 'File to write release notes to')
-  .summary('Create release notes')
+  .summary('Extract latest version from CHANGELOG.md as JSON.')
   .description(`Todo.`)
   .addHelpText('before', `Todo
 `)
   .addHelpText('after', `
 ${pc.magenta('Examples:')}
-  $ changelog release-notes:create
+  $ changelog latest
 `)
   .action(async (
+    filename: string|undefined,
     options?: Options
   ) => {
-    const outputFile = options?.['outputFile'];
+    const outputFile = options?.outputFile;
+    const changelog = await latestFromFile(filename ?? './CHANGELOG.md');
 
-    const notes = await getReleaseNotes({
-      directory: '.',
-      version: options?.selectVersion,
-    });
-
-    if (notes === undefined) {
-      // todo add error.
+    if (changelog === undefined) {
+      fatal('Unable to extract requested changelog.');
       return;
     }
 
+    const result = JSON.stringify(changelog, null, 2);
+
     if (outputFile) {
-      await writeFile(outputFile, notes);
-      console.error(`${pc.green('✓')} Done. Release notes written.
+      await writeFile(outputFile, result);
+      ok(`Done. Changelog written.
 ${pc.blue('→')} ${outputFile}`);
       return;
     }
 
-    console.log(notes);
-    console.error(`${pc.green('✓')} Done.`);
+    console.log(result);
+    ok('Done.');
   });
 
 export default command;

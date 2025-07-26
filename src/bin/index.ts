@@ -24,9 +24,11 @@
  */
 
 import {Command} from 'commander';
-import createReleaseNotesCommand from '../command/CreateReleaseNotes';
 import {addCommands, configureCommand} from '../library/Command';
 import {version} from '../../package.json';
+import extractCommand from '../command/ExtractCommand';
+import latestCommand from '../command/LatestCommand';
+import releaseNotesCommand from '../command/ReleaseNotesCommand';
 
 const app = new Command();
 
@@ -38,7 +40,9 @@ app
 configureCommand(app);
 
 addCommands(app, [
-  createReleaseNotesCommand,
+  extractCommand,
+  latestCommand,
+  releaseNotesCommand,
 ]);
 
 app.parse(process.argv);
