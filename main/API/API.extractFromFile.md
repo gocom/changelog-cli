@@ -8,7 +8,7 @@
 
 > **extractFromFile**(`options`): `Promise`\<`undefined` \| [`Changelog`](https://github.com/gocom/changelog)\>
 
-Defined in: [library/Extract.ts:53](https://github.com/gocom/changelog-cli/blob/a1f8fb6ed86b8e95e5ac513f134dc91e5ab7de3d/src/library/Extract.ts#L53)
+Defined in: [library/Extract.ts:53](https://github.com/gocom/changelog-cli/blob/96725a576b597ea419cb199c4cb2ee5f24561ff8/src/library/Extract.ts#L53)
 
 Extracts the specified version from the given changelog file.
 

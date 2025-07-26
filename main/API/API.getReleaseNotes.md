@@ -8,7 +8,7 @@
 
 > **getReleaseNotes**(`options`): `Promise`\<`undefined` \| `string`\>
 
-Defined in: [library/ReleaseNotes.ts:113](https://github.com/gocom/changelog-cli/blob/a1f8fb6ed86b8e95e5ac513f134dc91e5ab7de3d/src/library/ReleaseNotes.ts#L113)
+Defined in: [library/ReleaseNotes.ts:113](https://github.com/gocom/changelog-cli/blob/96725a576b597ea419cb199c4cb2ee5f24561ff8/src/library/ReleaseNotes.ts#L113)
 
 Get release notes for the given options.
 
