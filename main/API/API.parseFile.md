@@ -8,7 +8,7 @@
 
 > **parseFile**(`path`): `Promise`\<`undefined` \| [`Changelog`](https://github.com/gocom/changelog)[]\>
 
-Defined in: [library/Parser.ts:39](https://github.com/gocom/changelog-cli/blob/6a6f2390ca20a0773e2ec88bf49ba6615a3c61f9/src/library/Parser.ts#L39)
+Defined in: [library/Parser.ts:39](https://github.com/gocom/changelog-cli/blob/a1f8fb6ed86b8e95e5ac513f134dc91e5ab7de3d/src/library/Parser.ts#L39)
 
 Gets changelog from the specified file.
 
