@@ -45,13 +45,26 @@ command
   .argument('[select-version]', 'Selected version')
   .argument('[directory]', 'Project directory to process', '.')
   .option('-o --output-file <filename>', 'File to write release notes to')
-  .summary('Extract release notes')
-  .description(`Todo.`)
-  .addHelpText('before', `Todo
+  .summary('extract release notes from CHANGELOG.md')
+  .description(`Generates release notes from Markdown formatted changelog file.
+The release notes will contain the specified version's notes extracted from
+${pc.cyan('CHANGELOG.md')} file, located in the specified directory and additional details
+looked from npm and Composer packages' manifest files.
+
+If ${pc.yellow('select-version')} argument is specified, looks for the specified version from
+the ${pc.cyan('CHANGELOG.md')} file, otherwise the latest version.
+
+If ${pc.yellow('directory')} argument is specified, looks source files, such as CHANGELOG.md,
+from the specified directory. If not specified, looks for files from
+the current working directory.
+
+If ${pc.yellow('--output-file')} option is specified, the results are written to
+the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
+  .addHelpText('before', `Extract release notes from CHANGELOG.md.
 `)
   .addHelpText('after', `
 ${pc.magenta('Examples:')}
-  $ changelog release-notes:create
+  $ changelog release-notes 0.1.0
 `)
   .action(async (
     selectVersion: Version|undefined,

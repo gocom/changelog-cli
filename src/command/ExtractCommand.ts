@@ -44,10 +44,25 @@ command
   .name('extract')
   .argument('select-version', 'Version to extract')
   .argument('[filename]', 'CHANGELOG.md to process', './CHANGELOG.md')
-  .option('-o --output-file <filename>', 'File to results to')
-  .summary('Extract selected version from CHANGELOG.md as JSON.')
-  .description(`Todo.`)
-  .addHelpText('before', `Todo
+  .option('-o --output-file <filename>', 'File to write results to')
+  .summary('extract specified version from CHANGELOG.md as JSON')
+  .description(`Extracts the specified version from a Markdown formatted changelog file.
+Returns results as a JSON object, containing detailed details extracted from
+the specified changelog file. The results object will look similar to the
+following:
+
+  {
+    "version": "0.1.0",
+    "isPrerelease": false,
+    "titleStart": "",
+    "titleEnd": "",
+    "notes": "* Initial release."
+  }
+
+If no ${pc.yellow('filename')} argument is specified, looks for file named ${pc.cyan('CHANGELOG.md')} from
+the current working directory. If ${pc.yellow('--output-file')} option is specified, the
+results are written to the specified file, otherwise printed to ${pc.cyan('STDOUT')}.`)
+  .addHelpText('before', `Extract specified version from CHANGELOG.md as JSON.
 `)
   .addHelpText('after', `
 ${pc.magenta('Examples:')}
