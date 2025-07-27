@@ -54,6 +54,12 @@
     "picocolors": "^1.1.1"
   },
   "man": [
-    "./dist/man/man1/changelog.1"
+    "./dist/man/man1/changelog.1",
+    "./dist/man/man1/changelog-extract.1",
+    "./dist/man/man1/changelog-help.1",
+    "./dist/man/man1/changelog-latest.1",
+    "./dist/man/man1/changelog-parse.1",
+    "./dist/man/man1/changelog-release-notes.1",
+    "./dist/man/man1/changelog-versions.1"
   ]
 }

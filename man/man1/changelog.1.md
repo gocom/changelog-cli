@@ -18,23 +18,32 @@ CLI utility.
 
 # COMMANDS
 
-`extract` [*options*] `<`*select-version*`>` [*filename*]
-: Extract specified version from CHANGELOG.md as JSON.
+For information about individual command, see **man** **changelog-**`<`*command*`>` for the
+command specific man page.
 
-`latest` [*options*] [*filename*]
-: Extract specified version from CHANGELOG.md as JSON.
+**extract** [*options*] `<`*select-version*`>` [*filename*]
+: Extract specified version from CHANGELOG.md as JSON. For more information
+see **man** **changelog-extract**.
 
-`parse` [*options*] [*filename*]
-: Parse CHANGELOG.md into JSON.
+**latest** [*options*] [*filename*]
+: Extract specified version from CHANGELOG.md as JSON. For more information
+see **man** **changelog-latest**.
 
-`release-notes` [*options*] [*select-version*] [*filename*]
-: Extract release notes from CHANGELOG.md.
+**parse** [*options*] [*filename*]
+: Parse CHANGELOG.md into JSON. For more information
+see **man** **changelog-parse**.
 
-`versions` [*options*] [*filename*]
-: Lists available version from CHANGELOG.md.
+**release-notes** [*options*] [*select-version*] [*filename*]
+: Extract release notes from CHANGELOG.md. For more information
+see **man** **changelog-release-notes**.
 
-`help` [*command*]
-: Display help for a command.
+**versions** [*options*] [*filename*]
+: List available version from CHANGELOG.md. For more information
+see **man** **changelog-versions**.
+
+**help** [*command*]
+: Display help for a command. For more information
+see **man** **changelog-help**.
 
 # OPTIONS
 
@@ -50,6 +59,10 @@ Depends on external programs `node` as the runtime. Requires Node.js version 22
 or newer.
 
 # EXAMPLES
+
+Print build in help output:
+
+    $ changelog help
 
 Extract Markdown formatted release notes for the latest version mentioned in
 CHANGELOG.md file:
