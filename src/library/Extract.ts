@@ -43,7 +43,7 @@ import {parseFile} from './Parser';
  * ```ts
  * import {extractFromFile} from '@gocom/changelog-cli';
  *
- * const changelog = extractFromFile({
+ * const changelog = await extractFromFile({
  *  version: '0.2.0',
  *  path: 'path/to/CHANGELOG.md',
  * });
@@ -82,7 +82,7 @@ export const extractFromFile = async (options: ExtractOptions): Promise<Changelo
  * ```ts
  * import {latestFromFile} from '@gocom/changelog-cli';
  *
- * const changelog = latestFromFile('path/to/CHANGELOG.md');
+ * const changelog = await latestFromFile('path/to/CHANGELOG.md');
  *
  * console.log(changelog.version);
  * ```
@@ -93,7 +93,7 @@ export const latestFromFile = async (
 ): Promise<Changelog|undefined> => {
   const contents = await parseFile(path);
 
-  return contents
+  return contents?.length
     ? contents[0]
     : undefined;
 };

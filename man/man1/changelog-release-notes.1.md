@@ -35,6 +35,22 @@ the specified file, otherwise printed to `STDOUT`.
 `-o` `<`*filename*`>`, `--output-file` `<`*filename*`>`
 : File to write results to. If omitted, results are printed to `STDOUT`.
 
+`-t` `<`*filename*`>`, `--template-file` `<`*filename*`>`
+: Path to a Handlebars template file used for formatting the release notes. If not given, falls back to a default
+template.
+
+`--docs-url` `<`*url*`>`
+: Custom documentation URL. The URL can contain Handlebars template variables.
+
+`--download-url` `<`*url*`>`
+: Custom download URL. The URL can contain Handlebars template variables.
+
+`--composer`
+: Enables Composer package integration. Includes Composer package details in the release notes, if the flag is given.
+
+`--npm`
+: Enables npm package integration. Includes npm package details in the release notes, if the flag is given.
+
 *select-version*
 : Version to extract from CHANGELOG.md. If omitted, selects the
 latest version.

@@ -23,46 +23,29 @@
  * SOFTWARE.
  */
 
-import {readFile} from 'node:fs/promises';
+import {getReleaseNotes} from '../../library/ReleaseNotes';
 
-/**
- * Read JSON file.
- */
-export const readJsonFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+test('getReleaseNotes: valid', async () => {
+  const actual = await getReleaseNotes({
+    directory: './'
+  });
 
-      return JSON.parse(content);
-    } catch {
-      return undefined;
-    }
-  }
+  expect(actual).toBeDefined();
+});
 
-  return undefined;
-};
+test('getReleaseNotes: version does not exist', async () => {
+  const actual = await getReleaseNotes({
+    directory: './',
+    version: '3.5.2',
+  });
 
-/**
- * Read template file.
- */
-export const readTemplateFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+  expect(actual).toBeDefined();
+});
 
-      if (path.endsWith('.json')) {
-        return JSON.parse(content);
-      }
+test('getReleaseNotes: invalid directory', async () => {
+  const actual = await getReleaseNotes({
+    directory: './invalid',
+  });
 
-      return content;
-    } catch {
-      return undefined;
-    }
-  }
-
-  return undefined;
-};
+  expect(actual).toBeUndefined();
+});

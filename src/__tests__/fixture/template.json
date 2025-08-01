@@ -1,0 +1,4 @@
+[
+  "Project {{package.name}} version {{version}}",
+  "{{notes}}"
+]

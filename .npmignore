@@ -2,7 +2,9 @@
 /*
 __tests__
 *.test.js
+!/bin/
 !/dist/
+!/extra/
 !/CHANGELOG.md
 !/LICENSE
 !/README.md

@@ -23,46 +23,24 @@
  * SOFTWARE.
  */
 
-import {readFile} from 'node:fs/promises';
+import {Command} from 'commander';
+import {addCommands, configureCommand} from '../../library/Command';
 
-/**
- * Read JSON file.
- */
-export const readJsonFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+jest.mock('commander');
 
-      return JSON.parse(content);
-    } catch {
-      return undefined;
-    }
-  }
+test('configureCommand', () => {
+  const actual = configureCommand(new Command());
 
-  return undefined;
-};
+  expect(actual).toBeInstanceOf(Command);
+});
 
-/**
- * Read template file.
- */
-export const readTemplateFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
-
-      if (path.endsWith('.json')) {
-        return JSON.parse(content);
-      }
-
-      return content;
-    } catch {
-      return undefined;
-    }
-  }
-
-  return undefined;
-};
+test('addCommand', () => {
+  addCommands(
+    new Command(),
+    [
+      new Command(),
+      new Command(),
+      new Command(),
+    ]
+  );
+});

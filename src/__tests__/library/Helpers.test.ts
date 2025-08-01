@@ -23,46 +23,46 @@
  * SOFTWARE.
  */
 
-import {readFile} from 'node:fs/promises';
+import {readJsonFile, readTemplateFile} from '../../library/Helpers';
 
-/**
- * Read JSON file.
- */
-export const readJsonFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+test('readJsonFile: valid', async () => {
+  const actual = await readJsonFile('package.json');
 
-      return JSON.parse(content);
-    } catch {
-      return undefined;
-    }
-  }
+  expect(actual).toBeDefined();
+});
 
-  return undefined;
-};
+test('readJsonFile: invalid', async () => {
+  const actual = await readJsonFile('invalid.json');
 
-/**
- * Read template file.
- */
-export const readTemplateFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+  expect(actual).toBeUndefined();
+});
 
-      if (path.endsWith('.json')) {
-        return JSON.parse(content);
-      }
+test('readJsonFile: empty path given', async () => {
+  const actual = await readJsonFile('');
 
-      return content;
-    } catch {
-      return undefined;
-    }
-  }
+  expect(actual).toBeUndefined();
+});
 
-  return undefined;
-};
+test('readTemplateFile: JSON', async () => {
+  const actual = await readTemplateFile('src/__tests__/fixture/template.json');
+
+  expect(actual).toBeDefined();
+});
+
+test('readTemplateFile: Markdown', async () => {
+  const actual = await readTemplateFile('src/__tests__/fixture/template.md');
+
+  expect(actual).toBeDefined();
+});
+
+test('readTemplateFile: invalid', async () => {
+  const actual = await readTemplateFile('invalid.md');
+
+  expect(actual).toBeUndefined();
+});
+
+test('readTemplateFile: empty path given', async () => {
+  const actual = await readTemplateFile('');
+
+  expect(actual).toBeUndefined();
+});

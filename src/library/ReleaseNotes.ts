@@ -24,10 +24,10 @@
  */
 
 import path from 'node:path';
-import type {ReleaseNotesOptions, Template} from '@gocom/changelog';
+import type {Changelog, ReleaseNotesOptions, Template} from '@gocom/changelog';
 import {asReleaseNotes} from '@gocom/changelog';
 import type {GetReleaseNotesOptions} from '../types/ReleaseNotes';
-import {readJsonFile} from './Helpers';
+import {readJsonFile, readTemplateFile} from './Helpers';
 import {parseFile} from './Parser';
 
 /**
@@ -95,7 +95,7 @@ Or [download]({{downloadUrl}}).
 ];
 
 /**
- * Get release notes for the given options.
+ * Gets release notes for the given options.
  *
  * Reads CHANGELOG.md and common package manager manifest files from the project directory specified
  * via {@link GetReleaseNotesOptions.directory} option, and constructs opinionated Markdown formatted
@@ -109,6 +109,18 @@ Or [download]({{downloadUrl}}).
  * @return {string|undefined} Processed release notes, or `undefined`, if constructing release notes is not possible.
  * @group Library
  * @category API
+ * @example
+ * The following would generate release notes for version `1.3.2` for a project located in the
+ * `path/to/project/directory` directory:
+ * ```ts
+ * import {getReleaseNotes} from '@gocom/changelog-cli';
+ *
+ * const releaseNotes = await getReleaseNotes({
+ *  directory: 'path/to/project/directory',
+ *  version: '1.3.2',
+ * });
+ * ```
+ * The above `releaseNotes` variable will contain Markdown formatted release notes document string.
  */
 export const getReleaseNotes = async (options: GetReleaseNotesOptions) => {
   const {
@@ -116,27 +128,41 @@ export const getReleaseNotes = async (options: GetReleaseNotesOptions) => {
     version,
     isNpm,
     isComposer,
+    templateFile,
   } = options;
 
   const contents = await parseFile(
     path.join(directory, 'CHANGELOG.md')
   );
 
-  const changelog = contents
+  let changelog: Changelog|undefined = contents
     ?.find((item) => item.version === version || version === undefined);
 
+  // Emulate if given version, and does not have changelog.
+  if (version && !changelog) {
+    changelog = {
+      version,
+      notes: '',
+    };
+  }
+
   if (changelog) {
-    const npm = isNpm !== false
+    const npm = isNpm
       ? await readJsonFile(path.join(directory, 'package.json'))
       : undefined;
 
-    const composer = isComposer !== false
+    const composer = isComposer
       ? await readJsonFile(path.join(directory, 'composer.json'))
       : undefined;
 
     const releaseNoteOptions: ReleaseNotesOptions = {
       changelog,
       template: releaseNotesTemplate,
+
+      ...(!!templateFile && {
+        template: (await readTemplateFile(templateFile)) ?? releaseNotesTemplate,
+      }),
+
       variables: {
         npm,
         composer,

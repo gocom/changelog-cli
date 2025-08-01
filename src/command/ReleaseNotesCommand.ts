@@ -36,6 +36,11 @@ import {fatal, ok} from '../library/Command';
  */
 interface Options {
   outputFile?: PathLike
+  templateFile?: string
+  composer?: boolean
+  docsUrl?: string
+  downloadUrl?: string
+  npm?: boolean
 }
 
 const command = createCommand();
@@ -45,6 +50,11 @@ command
   .argument('[select-version]', 'Selected version')
   .argument('[directory]', 'Project directory to process', '.')
   .option('-o --output-file <filename>', 'File to write release notes to')
+  .option('-t --template-file <filename>', 'Template file')
+  .option('--composer', 'Enable Composer package integration')
+  .option('--docs-url <url>', 'Documentation URL')
+  .option('--download-url <url>', 'Download URL')
+  .option('--npm', 'Enable npm package integration')
   .summary('extract release notes from CHANGELOG.md')
   .description(`Generates release notes from Markdown formatted changelog file.
 The release notes will contain the specified version's notes extracted from
@@ -72,10 +82,16 @@ ${pc.magenta('Examples:')}
     options?: Options
   ) => {
     const outputFile = options?.outputFile;
+    const templateFile = options?.templateFile;
 
     const notes = await getReleaseNotes({
       directory: directory ?? '.',
       version: selectVersion,
+      templateFile,
+      isComposer: !!options?.composer,
+      isNpm: !!options?.npm,
+      docsUrl: options?.docsUrl,
+      downloadUrl: options?.downloadUrl,
     });
 
     if (notes === undefined) {

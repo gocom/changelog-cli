@@ -94,7 +94,7 @@ _changelog () {
 
     release-notes)
       case "$prev" in
-        -o|--output-file)
+        -o|--output-file|-t|--template-file)
             _filedir
             return
             ;;
@@ -102,7 +102,7 @@ _changelog () {
 
       case "$cur" in
         -*)
-          COMPREPLY=($(compgen -W '-o --output-file -h --help' -- "$cur"))
+          COMPREPLY=($(compgen -W '--composer --npm -o --output-file -t --template-file -h --help' -- "$cur"))
           return
           ;;
         *)

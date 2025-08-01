@@ -35,15 +35,25 @@ import type {ChangelogDocument, Changelog} from '@gocom/changelog';
  * specified file could not be processed.
  * @group Library
  * @category API
+ * @example
+ * ```ts
+ * import {parseFile} from '@gocom/changelog-cli';
+ *
+ * const changelog = await parseFile('path/to/CHANGELOG.md');
+ * ```
  */
 export const parseFile = async (path: string): Promise<Changelog[]|undefined> => {
-  try {
-    const contents: ChangelogDocument = await readFile(path, {
-      encoding: 'utf-8'
-    });
+  if (path) {
+    try {
+      const contents: ChangelogDocument = await readFile(path, {
+        encoding: 'utf-8'
+      });
 
-    return parse(contents);
-  } catch {
-    return undefined;
+      return parse(contents);
+    } catch {
+      return undefined;
+    }
   }
+
+  return undefined;
 };

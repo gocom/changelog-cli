@@ -56,10 +56,26 @@ export interface GetReleaseNotesOptions {
   version?: Version
 
   /**
+   * Path to a template file.
+   *
+   * If not specified, defaults to {@link Private.releaseNotesTemplate}. If the specified file ends to `.json`
+   * extension, it is treated as a JSON formatted file, allowing an array of template strings. Otherwise, the file
+   * is processed as if it contained a single template string.
+   *
+   * @example
+   * ```ts
+   * {
+   *  templateFile: 'path/to/release-notes.template.md'
+   * }
+   * ```
+   */
+  templateFile?: string
+
+  /**
    * Enables npm package processing.
    *
-   * If left undefined, defaults to `true`. When enabled, {@link getReleaseNotes} looks for `package.json` file
-   * from the {@link GetReleaseNotesOptions.directory} directory, and includes the package's npm installation
+   * When enabled, {@link getReleaseNotes} looks for `package.json` file from the
+   * {@link GetReleaseNotesOptions.directory} directory, and includes the package's npm installation
    * command in the generated release notes, if the file is found.
    *
    * @example
@@ -74,8 +90,8 @@ export interface GetReleaseNotesOptions {
   /**
    * Enables Composer package processing.
    *
-   * If left undefined, defaults to `true`. When enabled, {@link getReleaseNotes} looks for `composer.json` file
-   * from the {@link GetReleaseNotesOptions.directory} directory, and includes the package's composer installation
+   * When enabled, {@link getReleaseNotes} looks for `composer.json` file from the
+   * {@link GetReleaseNotesOptions.directory} directory, and includes the package's composer installation
    * command in the generated release notes, if the file is found.
    *
    * @example

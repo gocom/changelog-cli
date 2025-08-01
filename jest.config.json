@@ -9,6 +9,9 @@
     "^.+.tsx?$": ["ts-jest",{}]
   },
   "collectCoverageFrom": [
-    "**/*.ts"
+    "**/*.ts",
+    "!bin/**/*.ts",
+    "!command/**/*.ts",
+    "!library/Command.ts"
   ]
 }

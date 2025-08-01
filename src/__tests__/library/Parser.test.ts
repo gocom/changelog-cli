@@ -23,46 +23,22 @@
  * SOFTWARE.
  */
 
-import {readFile} from 'node:fs/promises';
+import {parseFile} from '../../library/Parser';
 
-/**
- * Read JSON file.
- */
-export const readJsonFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+test('parseFile: valid', async () => {
+  const actual = await parseFile('CHANGELOG.md');
 
-      return JSON.parse(content);
-    } catch {
-      return undefined;
-    }
-  }
+  expect(actual).toBeDefined();
+});
 
-  return undefined;
-};
+test('parseFile: invalid', async () => {
+  const actual = await parseFile('invalid.md');
 
-/**
- * Read template file.
- */
-export const readTemplateFile = async (path: string) => {
-  if (path) {
-    try {
-      const content = await readFile(path, {
-        encoding: 'utf-8'
-      });
+  expect(actual).toBeUndefined();
+});
 
-      if (path.endsWith('.json')) {
-        return JSON.parse(content);
-      }
+test('parseFile: empty path given', async () => {
+  const actual = await parseFile('');
 
-      return content;
-    } catch {
-      return undefined;
-    }
-  }
-
-  return undefined;
-};
+  expect(actual).toBeUndefined();
+});
