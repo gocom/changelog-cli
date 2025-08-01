@@ -8,7 +8,7 @@
 
 > **latestFromFile**(`path`): `Promise`\<`undefined` \| [`Changelog`](https://github.com/gocom/changelog)\>
 
-Defined in: [library/Extract.ts:91](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/library/Extract.ts#L91)
+Defined in: [library/Extract.ts:91](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/library/Extract.ts#L91)
 
 Gets the latest version from the given changelog file.
 
@@ -40,7 +40,7 @@ The following would extract version `3.0.0` from the changelog, as it is the gre
 ```ts
 import {latestFromFile} from '@gocom/changelog-cli';
 
-const changelog = latestFromFile('path/to/CHANGELOG.md');
+const changelog = await latestFromFile('path/to/CHANGELOG.md');
 
 console.log(changelog.version);
 ```

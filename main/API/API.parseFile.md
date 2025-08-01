@@ -8,7 +8,7 @@
 
 > **parseFile**(`path`): `Promise`\<`undefined` \| [`Changelog`](https://github.com/gocom/changelog)[]\>
 
-Defined in: [library/Parser.ts:39](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/library/Parser.ts#L39)
+Defined in: [library/Parser.ts:45](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/library/Parser.ts#L45)
 
 Gets changelog from the specified file.
 
@@ -26,3 +26,11 @@ Path to the changelog file to parse.
 
 Returns either an array of [Changelog](https://github.com/gocom/changelog) objects, or `undefined` if the
 specified file could not be processed.
+
+## Example
+
+```ts
+import {parseFile} from '@gocom/changelog-cli';
+
+const changelog = await parseFile('path/to/CHANGELOG.md');
+```

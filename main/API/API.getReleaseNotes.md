@@ -8,9 +8,9 @@
 
 > **getReleaseNotes**(`options`): `Promise`\<`undefined` \| `string`\>
 
-Defined in: [library/ReleaseNotes.ts:113](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/library/ReleaseNotes.ts#L113)
+Defined in: [library/ReleaseNotes.ts:125](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/library/ReleaseNotes.ts#L125)
 
-Get release notes for the given options.
+Gets release notes for the given options.
 
 Reads CHANGELOG.md and common package manager manifest files from the project directory specified
 via [GetReleaseNotesOptions.directory](../Options/API.GetReleaseNotesOptions.md#directory) option, and constructs opinionated Markdown formatted
@@ -33,3 +33,17 @@ Options.
 `Promise`\<`undefined` \| `string`\>
 
 Processed release notes, or `undefined`, if constructing release notes is not possible.
+
+## Example
+
+The following would generate release notes for version `1.3.2` for a project located in the
+`path/to/project/directory` directory:
+```ts
+import {getReleaseNotes} from '@gocom/changelog-cli';
+
+const releaseNotes = await getReleaseNotes({
+ directory: 'path/to/project/directory',
+ version: '1.3.2',
+});
+```
+The above `releaseNotes` variable will contain Markdown formatted release notes document string.

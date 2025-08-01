@@ -6,7 +6,7 @@
 
 # Interface: GetReleaseNotesOptions
 
-Defined in: [types/ReleaseNotes.ts:36](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L36)
+Defined in: [types/ReleaseNotes.ts:36](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L36)
 
 Get release notes options.
 
@@ -18,7 +18,7 @@ Options for [getReleaseNotes](../API/API.getReleaseNotes.md).
 
 > **directory**: `string`
 
-Defined in: [types/ReleaseNotes.ts:42](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L42)
+Defined in: [types/ReleaseNotes.ts:42](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L42)
 
 Project directory to process.
 
@@ -30,7 +30,7 @@ File such as CHANGELOG.md and package manager manifest files are looked up from 
 
 > `optional` **docsUrl**: `string`
 
-Defined in: [types/ReleaseNotes.ts:102](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L102)
+Defined in: [types/ReleaseNotes.ts:118](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L118)
 
 URL to the documentation.
 
@@ -50,7 +50,7 @@ The URL can contain Handlebar's template string.
 
 > `optional` **downloadUrl**: `string`
 
-Defined in: [types/ReleaseNotes.ts:116](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L116)
+Defined in: [types/ReleaseNotes.ts:132](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L132)
 
 Download URL.
 
@@ -70,12 +70,12 @@ The URL can contain Handlebar's template string.
 
 > `optional` **isComposer**: `boolean`
 
-Defined in: [types/ReleaseNotes.ts:88](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L88)
+Defined in: [types/ReleaseNotes.ts:104](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L104)
 
 Enables Composer package processing.
 
-If left undefined, defaults to `true`. When enabled, [getReleaseNotes](../API/API.getReleaseNotes.md) looks for `composer.json` file
-from the [GetReleaseNotesOptions.directory](#directory) directory, and includes the package's composer installation
+When enabled, [getReleaseNotes](../API/API.getReleaseNotes.md) looks for `composer.json` file from the
+[GetReleaseNotesOptions.directory](#directory) directory, and includes the package's composer installation
 command in the generated release notes, if the file is found.
 
 #### Example
@@ -92,12 +92,12 @@ command in the generated release notes, if the file is found.
 
 > `optional` **isNpm**: `boolean`
 
-Defined in: [types/ReleaseNotes.ts:72](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L72)
+Defined in: [types/ReleaseNotes.ts:88](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L88)
 
 Enables npm package processing.
 
-If left undefined, defaults to `true`. When enabled, [getReleaseNotes](../API/API.getReleaseNotes.md) looks for `package.json` file
-from the [GetReleaseNotesOptions.directory](#directory) directory, and includes the package's npm installation
+When enabled, [getReleaseNotes](../API/API.getReleaseNotes.md) looks for `package.json` file from the
+[GetReleaseNotesOptions.directory](#directory) directory, and includes the package's npm installation
 command in the generated release notes, if the file is found.
 
 #### Example
@@ -110,11 +110,33 @@ command in the generated release notes, if the file is found.
 
 ***
 
+### templateFile?
+
+> `optional` **templateFile**: `string`
+
+Defined in: [types/ReleaseNotes.ts:72](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L72)
+
+Path to a template file.
+
+If not specified, defaults to [Private.releaseNotesTemplate](../API/Private.releaseNotesTemplate.md). If the specified file ends to `.json`
+extension, it is treated as a JSON formatted file, allowing an array of template strings. Otherwise, the file
+is processed as if it contained a single template string.
+
+#### Example
+
+```ts
+{
+ templateFile: 'path/to/release-notes.template.md'
+}
+```
+
+***
+
 ### version?
 
 > `optional` **version**: `string`
 
-Defined in: [types/ReleaseNotes.ts:56](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/types/ReleaseNotes.ts#L56)
+Defined in: [types/ReleaseNotes.ts:56](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/types/ReleaseNotes.ts#L56)
 
 Version number the release notes are created for.
 

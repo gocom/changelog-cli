@@ -8,7 +8,7 @@
 
 > **extractFromFile**(`options`): `Promise`\<`undefined` \| [`Changelog`](https://github.com/gocom/changelog)\>
 
-Defined in: [library/Extract.ts:53](https://github.com/gocom/changelog-cli/blob/3b4a6d4709757866fb2f2a2b7d73a6fccece5cbf/src/library/Extract.ts#L53)
+Defined in: [library/Extract.ts:53](https://github.com/gocom/changelog-cli/blob/05d5506a9c7659930eb07ecca802c0527f08d7d1/src/library/Extract.ts#L53)
 
 Extracts the specified version from the given changelog file.
 
@@ -36,7 +36,7 @@ The following would extract version 0.2.0's notes from the given [ExtractOptions
 ```ts
 import {extractFromFile} from '@gocom/changelog-cli';
 
-const changelog = extractFromFile({
+const changelog = await extractFromFile({
  version: '0.2.0',
  path: 'path/to/CHANGELOG.md',
 });
