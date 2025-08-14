@@ -8,7 +8,7 @@
 
 > `const` **releaseNotesTemplate**: [`Template`](https://github.com/gocom/changelog)[]
 
-Defined in: [library/ReleaseNotes.ts:41](https://github.com/gocom/changelog-cli/blob/8c0d751961ac375d71107d21f2f3f1934a62002b/src/library/ReleaseNotes.ts#L41)
+Defined in: [library/ReleaseNotes.ts:41](https://github.com/gocom/changelog-cli/blob/6c7536a38a30ab42e6ece90e04a897428a95f4d8/src/library/ReleaseNotes.ts#L41)
 
 Default release notes template.
 
